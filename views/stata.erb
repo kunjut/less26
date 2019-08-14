@@ -1,0 +1,12 @@
+<h2>Личный кабинет</h2>
+<p><%= @subhead %></p>
+
+<br /><p>Записавшиеся</p>
+<% while (line = @f_users.gets) %>
+    <%= line.chomp.force_encoding("UTF-8") %><br />
+<% end %>
+
+<br /><p>Контакты и сообщения</p>
+<% while (line = @f_contacts.gets) %>
+    <%= line.chomp.force_encoding("UTF-8") %><br />
+<% end %>
