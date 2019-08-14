@@ -17,10 +17,10 @@
     <div class="form-group">
         <label>Кто ваш мастер?</label>
         <select name="master" class="form-control">
-            <option selected="true" disabled="disabled">Выберите мастера</option>
-            <option>Уолтер Уайт</option>
-            <option>Джесси Пинкман</option>
-            <option>Гас Фринг</option>
+            <option selected disabled="disabled">Выберите мастера</option>
+            <option <%= @master == 'Уолтер Уайт'    ? 'selected' : '' %>>Уолтер Уайт</option>
+            <option <%= @master == 'Джесси Пинкман' ? 'selected' : '' %>>Джесси Пинкман</option>
+            <option <%= @master == 'Гас Фринг'      ? 'selected' : '' %>>Гас Фринг</option>
         </select>
     </div>
     <div>
