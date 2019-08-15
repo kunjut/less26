@@ -53,6 +53,10 @@ get '/cabin' do
 	erb :cabin
 end
 
+get '/showusers' do
+	erb :showusers
+end
+
 post '/visit' do
 	@title = 'Записаться'
 	@username = params[:username]
