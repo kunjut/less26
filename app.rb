@@ -4,9 +4,17 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+# Важно, чтобы эта функция находилась сверху, перед configure do...end 
+# Когда была после блока (post '/visit') - приложение не запускалось
+# Также Рома говорил что нужен return перед SQLite3::D...
+# на деле и без него норм работает
+def get_db 
+	SQLite3::Database.new 'barbershop.db'
+end
+
 configure do
-	@db = SQLite3::Database.new 'barbershop.db'
-	@db.execute 'CREATE TABLE IF NOT EXISTS 
+	db = get_db
+	db.execute 'CREATE TABLE IF NOT EXISTS 
 		"Users"
 		(	
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -81,9 +89,25 @@ post '/visit' do
 	#	end
 	#------------------------------------------------------------------------------------#
 
-	@f = File.open './public/users.txt','a'
-	@f.write "username: #{@username}; phonenumber: #{@phonenumber}; datetime: #{@datetime}; master: #{@master}; color: #{@colorpicker}\n"
-	@f.close
+	#@f = File.open './public/users.txt','a'
+	#@f.write "	username: #{@username}; 
+	#			phonenumber: #{@phonenumber}; 
+	#			datetime: #{@datetime}; 
+	#			master: #{@master}; 
+	#			color: #{@colorpicker}
+	#			\n"
+	#@f.close
+	
+	db = get_db
+	db.execute 'INSERT INTO Users 
+		(
+			username, 
+			phone, 
+			datestamp, 
+			master, 
+			color
+		) 
+		VALUES (?,?,?,?,?)', [@username, @phonenumber, @datetime, @master, @colorpicker]
 
 	erb "Отлично #{@username}, мастер #{@master} ждет вас #{@datetime}.<br/>
 	Вы выбрали покраситься в #{@colorpicker} цвет.<br/>
