@@ -9,7 +9,9 @@ require 'sqlite3'
 # Также Рома говорил что нужен return перед SQLite3::D...
 # на деле и без него норм работает
 def get_db 
-	SQLite3::Database.new 'barbershop.db'
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
 end
 
 configure do
@@ -54,6 +56,7 @@ get '/cabin' do
 end
 
 get '/showusers' do
+	@db_output = get_db
 	erb :showusers
 end
 
