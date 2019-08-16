@@ -30,18 +30,14 @@ configure do
 		Barbers
 		(	
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT, 
-			"firstname" TEXT UNIQUE, 
-			"lastname" TEXT UNIQUE
+			"name" TEXT UNIQUE
 		)'
 	db.execute 'INSERT OR IGNORE INTO 
 		Barbers 
 		(
-			firstname, 
-			lastname
+			name
 		) 
-		VALUES 	("Уолтер", "Уайт"), 
-				("Джесси", "Пинкман"), 
-				("Гас", "Фринг")'
+		VALUES (?), (?), (?)', ["Уолтер Уайт"], ["Джесси Пинкман"], ["Гас Фринг"]
 end
 
 get '/' do
