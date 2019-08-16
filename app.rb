@@ -14,6 +14,11 @@ def get_db
 	return db
 end
 
+before '/visit' do
+	db = get_db
+	@barbers = db.execute 'SELECT name FROM Barbers'
+end
+
 configure do
 	db = get_db
 	db.execute 'CREATE TABLE IF NOT EXISTS 
@@ -53,10 +58,6 @@ end
 
 get '/visit' do
 	@title = 'Записаться'
-
-	db = get_db
-	@barbers = db.execute 'SELECT name FROM Barbers'
-
 	erb :visit
 end
 
@@ -84,10 +85,6 @@ post '/visit' do
 	@datetime = params[:datetime]
 	@master = params[:master]
 	@colorpicker = params[:colorpicker]
-		
-	# Чтобы при выборе барера и отправке работало! 
-	db = get_db
-	@barbers = db.execute 'SELECT name FROM Barbers'
 
 	hh = {	:username => 'Не введено имя',
 			:phonenumber => 'Не введен телефон',
@@ -181,5 +178,4 @@ post '/cabin' do
 		@subhead = 'Попробуйте еще раз'
 		erb :cabin
 	end
-	
 end
