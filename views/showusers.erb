@@ -20,7 +20,7 @@
                 <td><%= row['phone'].to_s %></td>
                 <td><%= row['datestamp'].to_s %></td>
                 <td><%= row['master'].to_s %></td>
-                <td><%= row['color'].to_s %></td>
+                <td style="background-color: <%= row['color'] %>"><%= row['color'].to_s %></td>
             </tr>
         <% end %>
     </tbody>
