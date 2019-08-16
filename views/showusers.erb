@@ -1,2 +1,11 @@
 <h2>База пользователей</h2>
 <p>Персональные данные пользователей</p>
+
+<% @db_output.execute 'SELECT * FROM Users ORDER BY id DESC' do |row| %>
+	<%= row['id'].to_s + ';' %>
+    <%= row['username'].to_s + ';' %>
+    <%= row['phone'].to_s + ';' %>
+    <%= row['datestamp'].to_s + ';' %>
+    <%= row['master'].to_s + ';' %>
+    <%= row['color'].to_s %><br />
+<% end %>
