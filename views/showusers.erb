@@ -1,11 +1,27 @@
 <h2>База пользователей</h2>
 <p>Персональные данные пользователей</p>
 
-<% @db_output.execute 'SELECT * FROM Users ORDER BY id DESC' do |row| %>
-	<%= row['id'].to_s + ';' %>
-    <%= row['username'].to_s + ';' %>
-    <%= row['phone'].to_s + ';' %>
-    <%= row['datestamp'].to_s + ';' %>
-    <%= row['master'].to_s + ';' %>
-    <%= row['color'].to_s %><br />
-<% end %>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>username</th>
+            <th>phone</th>
+            <th>datestamp</th>
+            <th>master</th>
+            <th>color</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @db_output.execute 'SELECT * FROM Users ORDER BY id DESC' do |row| %>
+            <tr>
+                <th scope="row"><%= row['id'].to_s %></th>
+                <td><%= row['username'].to_s %></td>
+                <td><%= row['phone'].to_s %></td>
+                <td><%= row['datestamp'].to_s %></td>
+                <td><%= row['master'].to_s %></td>
+                <td><%= row['color'].to_s %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
