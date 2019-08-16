@@ -68,7 +68,8 @@ get '/cabin' do
 end
 
 get '/showusers' do
-	@db_output = get_db
+	db = get_db
+	@results = db.execute 'SELECT * FROM Users ORDER BY id DESC'
 	erb :showusers
 end
 
@@ -117,6 +118,7 @@ post '/visit' do
 	#			\n"
 	#@f.close
 	
+	# Запись в базу данных при записи клиента
 	db = get_db
 	db.execute 'INSERT INTO Users 
 		(
