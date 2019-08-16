@@ -26,6 +26,22 @@ configure do
 			"master" TEXT, 
 			"color" TEXT
 		)'
+	db.execute 'CREATE TABLE IF NOT EXISTS 
+		Barbers
+		(	
+			"id" INTEGER PRIMARY KEY AUTOINCREMENT, 
+			"firstname" TEXT UNIQUE, 
+			"lastname" TEXT UNIQUE
+		)'
+	db.execute 'INSERT OR IGNORE INTO 
+		Barbers 
+		(
+			firstname, 
+			lastname
+		) 
+		VALUES 	("Уолтер", "Уайт"), 
+				("Джесси", "Пинкман"), 
+				("Гас", "Фринг")'
 end
 
 get '/' do
