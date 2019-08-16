@@ -18,9 +18,9 @@
         <label>Кто ваш мастер?</label>
         <select name="master" class="form-control">
             <option selected disabled="disabled">Выберите мастера</option>
-            <option <%= @master == 'Уолтер Уайт'    ? 'selected' : '' %>>Уолтер Уайт</option>
-            <option <%= @master == 'Джесси Пинкман' ? 'selected' : '' %>>Джесси Пинкман</option>
-            <option <%= @master == 'Гас Фринг'      ? 'selected' : '' %>>Гас Фринг</option>
+            <% @barbers.each do |i|%>
+            <option <%= @master == i['name'] ? 'selected' : '' %>><%= i['name'] %></option>
+            <% end%>
         </select>
     </div>
     <div>

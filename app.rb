@@ -53,6 +53,10 @@ end
 
 get '/visit' do
 	@title = 'Записаться'
+
+	db = get_db
+	@barbers = db.execute 'SELECT name FROM Barbers'
+
 	erb :visit
 end
 
@@ -80,6 +84,10 @@ post '/visit' do
 	@datetime = params[:datetime]
 	@master = params[:master]
 	@colorpicker = params[:colorpicker]
+		
+	# Чтобы при выборе барера и отправке работало! 
+	db = get_db
+	@barbers = db.execute 'SELECT name FROM Barbers'
 
 	hh = {	:username => 'Не введено имя',
 			:phonenumber => 'Не введен телефон',
@@ -117,7 +125,7 @@ post '/visit' do
 	#			color: #{@colorpicker}
 	#			\n"
 	#@f.close
-	
+
 	# Запись в базу данных при записи клиента
 	db = get_db
 	db.execute 'INSERT INTO Users 
