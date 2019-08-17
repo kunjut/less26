@@ -15,12 +15,12 @@
     <tbody>
         <% @results.each do |row| %>
             <tr>
-                <th scope="row"><%= row['id'].to_s %></th>
-                <td><%= row['username'].to_s %></td>
-                <td><%= row['phone'].to_s %></td>
-                <td><%= row['datestamp'].to_s %></td>
-                <td><%= row['master'].to_s %></td>
-                <td style="background-color: <%= row['color'] %>"><%= row['color'].to_s %></td>
+                <th scope="row"><%= row['id'] %></th>
+                <td><%= row['username'] %></td>
+                <td><%= row['phone'] %></td>
+                <td><%= row['datestamp'] %></td>
+                <td><%= row['master'] %></td>
+                <td style="background-color: <%= row['color'] %>"><%= row['color'] %></td>
             </tr>
         <% end %>
     </tbody>
