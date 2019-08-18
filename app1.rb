@@ -14,6 +14,18 @@ def get_db
 	return db
 end
 
+def is_barber_exists? db, name
+	db.execute('select * from Barbers where name=?', [name]).length > 0
+end
+
+def seed_db db, barbers
+	barbers.each do |barber|
+		if !is_barber_exists? db, barber
+			db.execute 'insert into Barbers (name) values (?)', [barber]
+		end
+	end 
+end 
+
 before '/visit' do
 	db = get_db
 	@barbers = db.execute 'SELECT name FROM Barbers'
@@ -37,12 +49,13 @@ configure do
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT, 
 			"name" TEXT
 		)'
-	db.execute 'INSERT OR IGNORE INTO 
-		Barbers 
-		(
-			name
-		) 
-		VALUES (?), (?), (?)', ["Уолтер Уайт"], ["Джесси Пинкман"], ["Гас Фринг"]
+	# db.execute 'INSERT OR IGNORE INTO 
+	# 	Barbers 
+	# 	(
+	# 		name
+	# 	) 
+	# 	VALUES (?), (?), (?)', ["Уолтер Уайт"], ["Джесси Пинкман"], ["Гас Фринг"]
+	seed_db db, ["Уолтер Уайт", "Джесси Пинкман", "Гас Фринг", "Дани Хани"]
 end
 
 get '/' do
